@@ -46,7 +46,6 @@ Rede_t config;
 // SOURCE CODE
 //==============================================================================
 
-//rede -w
 void shell_callback(uint8_t *cmd, uint16_t argc, uint8_t **argv)
 {
 	HAL_StatusTypeDef err = HAL_ERROR;
@@ -108,6 +107,5 @@ void shell_callback(uint8_t *cmd, uint16_t argc, uint8_t **argv)
 	{
 		SHELL_PRINTF("(X) Sintax error");
 	}
-
 }
 

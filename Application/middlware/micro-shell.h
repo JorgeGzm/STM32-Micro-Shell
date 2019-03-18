@@ -42,13 +42,6 @@ extern "C" {
 void vTaskMicroShell_init(uint16_t multi_stack_size);
 
 /**
- * Function to receive a string
- * @param Buf String
- * @param Len Size of string
- */
-void shell_gets(uint8_t* Buf, uint32_t Len);
-
-/**
  * Function to receive one byte
  * @param c byte received.
  */
@@ -60,16 +53,6 @@ void shell_getc(uint8_t c);
  * @param pHigherPriorityTaskWoken Woken of task.
  */
 void shell_isr_getc(uint8_t c, BaseType_t *pHigherPriorityTaskWoken);
-
-/**
- *
- * @param type
- * @param s
- * @param size
- * @param numToInitShow
- * @return
- */
-HAL_StatusTypeDef shell_outPutFormat(const uint8_t *type, const uint8_t *s, uint16_t size, uint16_t numToInitShow);
 
 //==============================================================================
 // WEAK FUNCTIONS

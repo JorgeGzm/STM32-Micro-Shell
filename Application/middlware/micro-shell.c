@@ -167,17 +167,6 @@ void vTaskMicroShell_init(uint16_t multi_stack_size)
 	configASSERT(xReturned);
 }
 
-void shell_gets(uint8_t* Buf, uint32_t Len)
-{
-	uint32_t i;
-
-	for(i=0; i< Len; i++)
-	{
-		shell_getc(*Buf);
-		Buf++;
-	}
-}
-
 void shell_getc(uint8_t c)
 {
 	if(xSemaphoreShell != NULL)
@@ -230,48 +219,6 @@ void shell_isr_getc(uint8_t c, BaseType_t *pHigherPriorityTaskWoken)
 			read_ptr = (read_ptr + 1) % SHELL_BUFFER_SIZE;
 		}
 	}
-}
-
-HAL_StatusTypeDef shell_outPutFormat(const uint8_t *type, const uint8_t *s, uint16_t size, uint16_t numToInitShow)
-{
-	uint16_t i;
-	HAL_StatusTypeDef err = HAL_OK;
-
-	if(strcmp("-d", (const char *)type) == 0)
-	{
-		SHELL_PRINTF("Reg\tDec");
-		for(i=0; i<size; i++)
-		{
-			SHELL_PRINTF("[%u]\t%i", i+numToInitShow, s[i]);
-		}
-	}
-	else if(strcmp("-c", (const char *)type) == 0)
-	{
-		SHELL_PRINTF("Reg\tCaracter");
-		for(i=0; i<size; i++)
-		{
-			SHELL_PRINTF("[%u]\t%c", i+numToInitShow, s[i]);
-		}
-	}
-	else if(strcmp("-x", (const char *)type) == 0)
-	{
-		SHELL_PRINTF("Reg\tHexa");
-		for(i=0; i<size; i++)
-		{
-			SHELL_PRINTF("[%u]\t0x%x", i+numToInitShow, s[i]);
-		}
-	}
-	else if(strcmp("-s", (const char *)type) == 0)
-	{
-		SHELL_PRINTF("String");
-		SHELL_PRINTF("%s", s);
-	}
-	else
-	{
-		err = HAL_ERROR;
-	}
-
-	return err;
 }
 
 //==============================================================================
