@@ -18,7 +18,9 @@
 // PRIVATE DEFINITIONS
 //==============================================================================
 
+/* O tamanho da task deve mudar mediante o tamanho da aplicacao contida na funcao "shell_callback". */
 #define SHELL_MULTIPLY_TASK_SIZE  		5 		/* Tamanho da task shell = configMINIMAL_STACK_SIZE x SHELL_MULTIPLY_STACK_SIZE */
+
 #define MAX_SIZE_BUFFER		  			512		/* Tamanho do buffer de output da serial */
 
 //==============================================================================
@@ -48,6 +50,7 @@ void xprintf(char * format, ...)
 	va_list args;
 	uint16_t len;
 
+	/* Formata a mensagem para ser enviada pela serial */
 	va_start(args, format);
 	len = vsnprintf((char *)serialBuff, MAX_SIZE_BUFFER, format, args);
 	va_end (args);
@@ -69,8 +72,10 @@ uint8_t serial_get_data(void)
 
 void setup_init(void)
 {
+	/* Inicializa recepcao de dado pela serial */
 	serial_rx_init();
 
+	/* Inicializa task shell */
 	vTaskMicroShell_init(SHELL_MULTIPLY_TASK_SIZE);
 
 	/* Envia mensagem de start do sistema */
