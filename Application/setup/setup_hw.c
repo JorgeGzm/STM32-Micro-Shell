@@ -55,6 +55,7 @@ void xprintf(char * format, ...)
 	len = vsnprintf((char *)serialBuff, MAX_SIZE_BUFFER, format, args);
 	va_end (args);
 
+	/* TX: Transmite a mensagem formata pela saida serial. */
 	HAL_UART_Transmit(&huart2, serialBuff, len, HAL_MAX_DELAY);
 }
 
@@ -79,6 +80,6 @@ void setup_init(void)
 	vTaskMicroShell_init(SHELL_MULTIPLY_TASK_SIZE);
 
 	/* Envia mensagem de start do sistema */
-	xprintf("Init Program...\r\n");
+	xprintf("%s", "Init Program...\r\n");
 }
 

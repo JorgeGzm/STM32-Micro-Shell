@@ -306,6 +306,7 @@ void StartDefaultTask(void const * argument)
 
   /* USER CODE BEGIN 5 */
 
+  /* Rotina para inicializar as tasks da nossa aplicacao. */
   setup_init();
 
   /* Infinite loop */
